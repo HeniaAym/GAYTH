@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المتطوعين</title>
+    <link rel="stylesheet" href="stylev.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="donate.html">تبرع الآن</a></li>
+                <li><a href="patients.html">المرضى</a></li>
+                <li><a href="volunteers.html">المتطوعين</a></li>
+                <li><a href="login.html">تسجيل الدخول</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>قائمة المتطوعين</h1>
+
+        <!-- زر إضافة متطوع -->
+        <button id="add-volunteer-button">إضافة متطوع جديد</button>
+
+        <!-- نموذج إضافة متطوع -->
+        <div id="volunteer-form-container" class="hidden">
+            <h2>إضافة متطوع جديد</h2>
+            <form id="volunteer-form">
+                <label for="volunteer-name">اسم المتطوع:</label>
+                <input type="text" id="volunteer-name" required><br><br>
+
+                <label for="volunteer-skills">المهارات:</label>
+                <input type="text" id="volunteer-skills" required><br><br>
+
+                <label for="volunteer-contact">معلومات الاتصال:</label>
+                <input type="text" id="volunteer-contact" required><br><br>
+
+                <label for="volunteer-city">المدينة:</label>
+                <input type="text" id="volunteer-city" required><br><br>
+
+                <label for="volunteer-state">الولاية:</label>
+                <input type="text" id="volunteer-state" required><br><br>
+
+                <label for="volunteer-photo">الصورة:</label>
+                <input type="file" id="volunteer-photo" name="photo" required><br><br>
+
+                <button type="submit">إضافة المتطوع</button>
+            </form>
+            <button id="close-form">إغلاق النموذج</button>
+        </div>
+
+        <!-- عرض المتطوعين -->
+        <div class="volunteers-grid" id="volunteers-list">
+            <!-- سيتم ملأ المتطوعين هنا من خلال JavaScript -->
+        </div>
+    </main>
+
+    <script>
+        // إظهار النموذج
+        document.getElementById('add-volunteer-button').addEventListener('click', () => {
+            const formContainer = document.getElementById('volunteer-form-container');
+            formContainer.classList.remove('hidden');
+            formContainer.style.display = 'block';
+        });
+
+        // إغلاق النموذج
+        document.getElementById('close-form').addEventListener('click', () => {
+            const formContainer = document.getElementById('volunteer-form-container');
+            formContainer.classList.add('hidden');
+            formContainer.style.display = 'none';
+        });
+
+        // تحميل المتطوعين
+        function loadVolunteers() {
+            fetch('http://localhost:5000/api/volunteers')  // تأكد من أن URL صحيح
+                .then(response => response.json())
+                .then(data => {
+                    const volunteersList = document.getElementById('volunteers-list');
+                    volunteersList.innerHTML = ''; // إعادة تعيين المحتوى قبل إضافة المتطوعين
+                    data.forEach(volunteer => {
+                        const volunteerElement = document.createElement('div');
+                        volunteerElement.classList.add('volunteer-item');
+                        volunteerElement.innerHTML = `
+                            <img src="${volunteer.photo}" alt="صورة المتطوع" width="100">
+                            <h3>${volunteer.Name}</h3>
+                            <p>المهارات: ${volunteer.Skills}</p>
+                            <p>معلومات الاتصال: ${volunteer.ContactInfo}</p>
+                            <p>المدينة: ${volunteer.City}</p>
+                            <p>الولاية: ${volunteer.State}</p>
+                        `;
+                        volunteersList.appendChild(volunteerElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching volunteers:', error);
+                });
+        }
+
+        // إضافة متطوع جديد
+        document.getElementById('volunteer-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('Name', document.getElementById('volunteer-name').value);
+            formData.append('Skills', document.getElementById('volunteer-skills').value);
+            formData.append('ContactInfo', document.getElementById('volunteer-contact').value);
+            formData.append('City', document.getElementById('volunteer-city').value);
+            formData.append('State', document.getElementById('volunteer-state').value);
+            formData.append('photo', document.getElementById('volunteer-photo').files[0]);
+
+            fetch('http://localhost:5000/api/volunteers', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('تم إضافة المتطوع بنجاح');
+                loadVolunteers(); // إعادة تحميل المتطوعين بعد الإدخال
+                document.getElementById('volunteer-form').reset();
+                const formContainer = document.getElementById('volunteer-form-container');
+                formContainer.classList.add('hidden');
+                formContainer.style.display = 'none';
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // تحميل المتطوعين عند تحميل الصفحة
+        loadVolunteers();
+    </script>
+</body>
+</html>

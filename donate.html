@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تبرع الآن</title>
+    <link rel="stylesheet" href="styledonate.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="donate.html">تبرع الآن</a></li>
+                <li><a href="patients.html">المرضى</a></li>
+                <li><a href="volunteers.html">المتطوعين</a></li>
+                <li><a href="login.html">تسجيل الدخول</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>تبرع الآن</h1>
+        <form action="http://localhost:5000/items" method="POST" enctype="multipart/form-data">
+            <label for="itemName">اسم العنصر:</label>
+            <input type="text" name="itemName" id="itemName" required><br><br>
+        
+            <label for="description">الوصف:</label>
+            <textarea name="description" id="description" required></textarea><br><br>
+        
+            <label for="state">الولاية:</label>
+            <input type="text" name="state" id="state" required><br><br>
+        
+            <label for="userId">معرف المستخدم:</label>
+            <input type="text" name="userId" id="userId" required><br><br>
+        
+            <label for="image">تحميل الصورة:</label>
+            <input type="file" name="image" id="image" required><br><br>
+        
+            <button type="submit">رفع العنصر</button>
+        </form>
+        
+    </main>
+</body>
+</html>

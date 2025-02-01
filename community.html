@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مجتمع المنصة الخيرية</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="community.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- قسم إنشاء منشور جديد -->
+        <div class="create-post">
+            <h2>منشور جديد</h2>
+            <form id="postForm">
+                <textarea placeholder="شارك فكرتك مع المجتمع..." required></textarea>
+                <select name="postType">
+                    <option value="عام">منشور عام</option>
+                    <option value="تطوعي">نشاط تطوعي</option>
+                </select>
+                <button type="submit">نشر</button>
+            </form>
+        </div>
+
+        <!-- قسم المنشورات -->
+        <div class="posts-container">
+            <h2>المنشورات</h2>
+            <div id="posts"></div>
+            <button id="loadMore" class="load-more">تحميل المزيد</button>
+        </div>
+    </div>
+
+    <!-- قالب المنشور -->
+    <template id="postTemplate">
+        <div class="post">
+            <div class="post-header">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="username"></span>
+                </div>
+                <span class="post-date"></span>
+            </div>
+            <div class="post-content"></div>
+            <div class="post-footer">
+                <button class="comment-btn">
+                    <i class="fas fa-comment"></i>
+                    <span class="comments-count">0</span> تعليقات
+                </button>
+            </div>
+            <div class="comments-section" style="display: none;">
+                <div class="comments-container"></div>
+                <form class="comment-form">
+                    <textarea placeholder="أضف تعليقك..." required></textarea>
+                    <button type="submit">تعليق</button>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <script src="js/community.js"></script>
+</body>
+</html>

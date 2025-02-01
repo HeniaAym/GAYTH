@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المرضى</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="donate.html">تبرع الآن</a></li>
+                <li><a href="patients.html">المرضى</a></li>
+                <li><a href="volunteers.html">المتطوعين</a></li>
+                <li><a href="login.html">تسجيل الدخول</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>المرضى</h1>
+
+        <div class="items-grid" id="patients-list">
+            <!-- سيتم ملأ المرضى هنا من خلال JavaScript -->
+        </div>
+    </main>
+
+    <script>
+        fetch('http://localhost:5000/patients')
+            .then(response => response.json())
+            .then(data => {
+                const patientsList = document.getElementById('patients-list');
+                data.forEach(patient => {
+                    const patientElement = document.createElement('div');
+                    patientElement.classList.add('item');
+                    const imageUrl = patient.Image ? patient.Image : '/uploads/default-image.jpg';
+                    patientElement.innerHTML = `
+                        <img src="${imageUrl}" alt="${patient.PatientName}" width="200">
+                        <h3>${patient.PatientName}</h3>
+                        <p>الوصف: ${patient.ConditionDescription}</p>
+                        <p>المدينة: ${patient.City}</p>
+                        <p>الولاية: ${patient.State}</p>
+                    `;
+                    patientsList.appendChild(patientElement);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

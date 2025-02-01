@@ -1,0 +1,196 @@
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding:0;
+    direction: rtl; /* Set page to right-to-left */
+}
+
+header {
+    background-color: #27ae60;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-transform: uppercase;
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+header nav ul li a:hover {
+    background-color: #16a085;
+    border-radius: 4px;
+}
+
+#quote-box {
+    background-color: rgba(46, 204, 113, 0.1);
+    border-radius: 15px;
+    text-align: center;
+    padding: 30px;
+    margin: 20px auto;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#quote-box p {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #2c3e50;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#donate-button {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    margin-top: 20px;
+    font-size: 1.1em;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#donate-button:hover {
+    background-color: #27ae60;
+}
+
+#search-section {
+    text-align: center;
+     margin: 30px 0;
+}
+
+#search-form {
+    display: inline-block;
+    position: relative;
+    width: 50%;
+}
+
+#search-input {
+    padding: 15px 50px 15px 20px;
+    width: 100%;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#search-form i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #999;
+}
+#titel-home {
+    padding: 30px;
+
+}
+#section-titel {
+    padding: 30px;
+}
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+.item {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.item:hover {
+    transform: scale(1.05);
+}
+
+.item img {
+    max-width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+
+/* تنسيق زر إضافة متطوع */
+#add-volunteer-button {
+    background-color: #ff4081;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#add-volunteer-button:hover {
+    background-color: #e7376a;
+}
+
+/* تنسيق النموذج */
+#volunteer-form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 9;
+}
+
+#volunteer-form-container.hidden {
+    display: none;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    background-color: #ff4081;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e7376a;
+}
+
+.volunteer-item {
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.hidden {
+    display: none;
+}
+

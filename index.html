@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التبرعات الخيرية</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Add this to your head section if you don't have Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="donate.html">تبرع الآن</a></li>
+                <li><a href="patients.html">المرضى</a></li>
+                <li><a href="volunteers.html">المتطوعين</a></li>
+                <li><a href="community.html">مجتمع المتطوعين</a></li> 
+                <li><a href="login.html">تسجيل الدخول</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <section id="quote-box">
+        <p>وَمَن يَقْتَرِفْ حَسَنَةً نَّزِدْ لَهُ فِيهَا حُسْنًا ۚ إِنَّ اللَّهَ غَفُورٌ شَكُورٌ</p>
+        <button id="donate-button" onclick="window.location.href='donate.html'">تبرع الآن</button>
+    </section>
+
+    <main>
+        <h1 id="titel-home">مرحبًا بكم في منصة غيث الخيرية   </h1>
+
+        <!-- Search Form Without Button -->
+        <section id="search-section">
+            <form id="search-form" action="/search-results" method="GET">
+                <input type="text" name="query" id="search-input" placeholder="ابحث هنا...">
+                <i class="fa fa-search"></i>
+            </form>
+        </section>
+
+        <h2 id="section-title">التبرعات</h2>
+
+        <div class="items-grid" id="items-list">
+            <!-- سيتم ملأ العناصر هنا من خلال JavaScript -->
+        </div>
+    </main>
+
+    <script>
+        function loadItems() {
+            document.getElementById('section-title').innerText = 'التبرعات';
+            fetch('http://localhost:5000/items')
+                .then(response => response.json())
+                .then(data => {
+                    const itemsList = document.getElementById('items-list');
+                    itemsList.innerHTML = '';
+                    data.forEach(item => {
+                        const itemElement = document.createElement('div');
+                        itemElement.classList.add('item');
+                        const imageUrl = item.Image ? `http://localhost:5000${item.Image}` : '/uploads/default-image.jpg';
+                        itemElement.innerHTML = `
+                            <img src="${imageUrl}" alt="${item.ItemName}" width="300">
+                            <h3>${item.ItemName}</h3>
+                            <p>${item.Description}</p>
+                            <p>الولاية: ${item.State}</p>
+                        `;
+                        itemsList.appendChild(itemElement);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        loadItems(); // تحميل التبرعات بشكل افتراضي عند تحميل الصفحة
+    </script>
+</body>
+</html>
